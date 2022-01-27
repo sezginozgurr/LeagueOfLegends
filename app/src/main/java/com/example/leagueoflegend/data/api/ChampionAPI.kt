@@ -8,15 +8,15 @@ import retrofit2.http.Path
 
 interface ChampionAPI {
     @GET("cdn/{apiVersion}/data/{language}/champion.json")
-    fun getAllChampions(
+    suspend fun getAllChampions(
         @Path("apiVersion") apiVersion: String = "12.2.1",
         @Path("language") language: String = "en_US"
-    ): LiveData<ChampionResponse>
+    ): ChampionResponse
 
     @GET("cdn/{apiVersion}/data/{language}/{championId}.json")
     suspend fun getChampionsById(
         @Path("apiVersion") apiVersion: String = "12.2.1",
         @Path("language") language: String = "en_US",
         @Path("championId") championId: String = "Aatrox"
-    ): LiveData<ChampionByIdResponse>
+    ): ChampionByIdResponse
 }

@@ -10,5 +10,14 @@ import kotlinx.coroutines.launch
 
 class ChampionsViewModel(private val championsRepository: ChampionsRepository) : ViewModel() {
 
-    val championList: LiveData<ChampionResponse> = championsRepository.getAllChampions()
+    private val mutableChampionList: MutableLiveData<ChampionResponse> = MutableLiveData()
+    val championList: LiveData<ChampionResponse>
+        get() = mutableChampionList
+
+    fun getAllChampions() {
+        viewModelScope.launch {
+            mutableChampionList.value = championsRepository.getAllChampions()
+        }
+    }
+
 }

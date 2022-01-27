@@ -7,5 +7,5 @@ import retrofit2.Response
 
 class ChampionsRepository(private val championAPI: ChampionAPI) {
 
-    fun getAllChampions(): LiveData<ChampionResponse> = championAPI.getAllChampions()
+    suspend fun getAllChampions(): ChampionResponse = championAPI.getAllChampions()
 }
